@@ -16,7 +16,6 @@ public:
             count++;
         }
         ans=max(ans,count);
-        map.clear();
         return ans ;
         
     }
