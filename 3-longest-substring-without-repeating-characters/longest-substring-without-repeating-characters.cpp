@@ -1,32 +1,26 @@
 class Solution {
 public:
+ 
     int lengthOfLongestSubstring(string s) {
+    // sliding window approach 
+    int ans = 0 , l = 0 , r = 0  ;
+    unordered_map <char , int > map ; 
 
-        unordered_map<char,int> mp;
+    while( r<s.size()){
 
-        int l = 0, r = 0;
-        int ans = 0;
-
-        while (r < s.size()) {
-
-            if (mp.find(s[r]) != mp.end()) {
-
-                ans = max(ans, r - l);
-
-                int last = mp[s[r]];
-
-                for (int i = l; i <= last; i++)
-                    mp.erase(s[i]);
-
-                l = last + 1;
+        if(map.find(s[r])!=map.end()){
+            ans = max(ans , r-l);
+            int last = map[s[r]];
+            for( int i = l   ; i<= last ; i++){
+                map.erase(s[i]);
             }
-
-            mp[s[r]] = r;
-            r++;
+            l = last+1;
         }
 
-        ans = max(ans, r - l);
-
-        return ans;
+        map[s[r]] = r;
+        r++;
+    }
+    ans=max(ans ,r-l);
+    return ans ; 
     }
 };
